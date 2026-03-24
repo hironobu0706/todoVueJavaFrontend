@@ -3,14 +3,39 @@ import { ref } from 'vue'
 import viteLogo from '../assets/vite.svg'
 import heroImg from '../assets/hero.png'
 import vueLogo from '../assets/vue.svg'
+import axios from 'axios'
 
 const count = ref(0)
+function sample() {
+  // GETリクエスト（通信）
+  const url = axios.get("http://localhost:8080/api/sample")
+    // thenで成功した場合の処理
+    .then(() => {
+      console.log("ステータスコード:", status);
+    })
+    // catchでエラー時の挙動を定義
+    .catch(err => {
+      console.log("err:", err);
+    });
+
+  //POSTリクエスト（通信）
+  // const data = { firstName: "Taro", lastName: "Yamada" }
+  // const url = axios.post("http://localhost:3000/user/123", data)
+
+  //   .then(() => {
+  //     console.log(url)
+  //   })
+
+  //   .catch(err => {
+  //     console.log("err:", err);
+  //   });
+}
 </script>
 
 <template>
   <section id="center">
     <div class="hero">
-      test
+      <button @click="sample">test2</button>
       <img :src="heroImg" class="base" width="170" height="179" alt="" />
       <img :src="vueLogo" class="framework" alt="Vue logo" />
       <img :src="viteLogo" class="vite" alt="Vite logo" />
