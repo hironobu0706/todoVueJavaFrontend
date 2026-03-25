@@ -1,4 +1,4 @@
-:root {
+/* :root {
   --text: #6b6375;
   --text-h: #08060d;
   --bg: #fff;
@@ -293,4 +293,29 @@ code {
     right: 0;
     border-right-color: var(--border);
   }
+} */
+
+body{
+  width:1200px;
+  margin: auto;
+  text-align: left;
+}
+
+.button-container {
+  width: 100%;
+  display: flex; /* ボタンを横並びにする */
+  gap: 50px; /* ボタンの間に50pxの間隔をあける */
+  justify-content: center; /* ボタンを中央に配置する */
+  margin-top: 20px;
+}
+
+.next-button {
+  width:200px;
+  height:80px;
+}
+
+.back-button {
+  background-color: gray!important;
+  width:200px;
+  height:80px;
 }

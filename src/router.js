@@ -4,6 +4,10 @@
 import { createRouter, createWebHistory} from 'vue-router'
 import sample1 from './components/pages/sample1.vue'
 import sample2 from './components/pages/sample2.vue'
+import init from './components/pages/init.vue'
+import customerInput from './components/pages/customerInput.vue'
+import customerConfirm from './components/pages/customerConfirm.vue'
+import customerRegistor from './components/pages/customerRegistor.vue'
 import HelloWorld from './components/HelloWorld.vue'
 
 // メモ
@@ -28,6 +32,31 @@ export const router = createRouter({
       path: '/sample2',
       name: 'sample2',
       component: sample2,
-    }
+    },
+    {
+      path: '/init',
+      name: 'init',
+      component: init,
+    },
+    {
+      path: '/customerInput',
+      name: 'customerInput',
+      component: customerInput,
+    },
+    {
+      path: '/customerConfirm',
+      name: 'customerConfirm',
+      component: customerConfirm,
+    },
+    {
+      path: '/customerRegistor',
+      name: 'customerRegistor',
+      component: customerRegistor,
+    },
+    // {
+    //   path: '*',
+    //   name: 'init',
+    //   component: init,
+    // },
   ]
 })
