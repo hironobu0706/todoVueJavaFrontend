@@ -5,40 +5,47 @@
 // import vueLogo from '../assets/vue.svg'
 // import axios from 'axios'
 import { useStore } from '../../store';
+import { useRouter } from "vue-router";
+import { ref, reactive,onMounted } from 'vue'
 
 export default {
   name: 'init',
   setup() {
+    const sample = ref(1);
+    let customer = reactive({
+      name: "",
+      nameKana: "",
+      jushoPref: "",
+      jusho1: "",
+      jusho2: "",
+      gender: "",
+    });
     const store = useStore();
-    return { store };
+    const router = useRouter();
+    const toCustomerConfirm = () => {
+      router.push("/customerConfirm")
+    };
+    const toInit = () => {
+      sample.value = 39;
+      // router.push("/init")
+    };
+    onMounted(() => {
+      console.log('-- App Mounted!! --') // mountedの確認用
+      Object.assign(customer, store.customer)
+    });
+    return {
+      sample,
+      customer,
+      store,
+      toCustomerConfirm,
+      toInit
+    };
   },
   created() {
     console.log('** App Created!! **') // createの確認用
   },
-  mounted() {
-    console.log('-- App Mounted!! --') // mountedの確認用
-    console.log(this.store.customer)
-    this.customer = this.store.customer
-  },
   data() {
     return {
-      title: 'Router',
-      customer: {
-        name: "",
-        nameKana: "",
-        jushoPref: "",
-        jusho1: "",
-        jusho2: "",
-        gender: "",
-      }
-    }
-  },
-  methods: {
-    toCustomerConfirm: function () {
-      this.$router.push("/customerConfirm")
-    },
-    toInit: function () {
-      this.$router.push("/init")
     }
   },
 }
@@ -48,6 +55,7 @@ export default {
   <h1>顧客情報入力画面</h1>
   <div>store:{{ store.count }}</div>
   <div>data: {{ this.customer.name }}</div>
+  <div>data2: {{ sample }}</div>
   <div>
     <table class="table table-bordered border custommer-table">
       <tbody>
@@ -82,19 +90,22 @@ export default {
           <td>性別</td>
           <td>
             <div class="form-check">
-              <input class="form-check-input" type="radio" name="radioDefault" id="radioDefault1" value="1" v-model="customer.gender">
+              <input class="form-check-input" type="radio" name="radioDefault" id="radioDefault1" value="1"
+                v-model="customer.gender">
               <label class="form-check-label" for="radioDefault1">
                 男性
               </label>
             </div>
             <div class="form-check">
-              <input class="form-check-input" type="radio" name="radioDefault" id="radioDefault2" value="2" v-model="customer.gender">
+              <input class="form-check-input" type="radio" name="radioDefault" id="radioDefault2" value="2"
+                v-model="customer.gender">
               <label class="form-check-label" for="radioDefault2">
                 女性
               </label>
             </div>
             <div class="form-check">
-              <input class="form-check-input" type="radio" name="radioDefault" id="radioDefault3" value="3" v-model="customer.gender">
+              <input class="form-check-input" type="radio" name="radioDefault" id="radioDefault3" value="3"
+                v-model="customer.gender">
               <label class="form-check-label" for="radioDefault3">
                 回答なし
               </label>
