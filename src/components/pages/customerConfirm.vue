@@ -5,41 +5,32 @@
 // import vueLogo from '../assets/vue.svg'
 // import axios from 'axios'
 import { useStore } from '../../store';
+import { useRouter } from "vue-router";
+import { onMounted } from 'vue'
 
 export default {
-  name: 'init',
+  name: 'customerConfirm',
   setup() {
     const store = useStore();
-    return { store };
-  },
-  created() {
-    console.log('** App Created!! **') // createの確認用
-  },
-  mounted() {
-    console.log('-- App Mounted!! --') // mountedの確認用
-    console.log(this.store.customer)
-    this.customer = this.store.customer
-  },
-  data() {
-    return {
-      title: 'Router',
-      customer: {
-        name: "",
-        nameKana: "",
-        jushoPref: "",
-        jusho1: "",
-        jusho2: "",
-        gender: "",
-      }
+    const router = useRouter();
+    const toCustomerInput = () => {
+      router.push("/customerInput")
+    };
+    const toCustomerRegistor = () => {
+      store.customerRegistor();
+      router.push("/customerRegistor")
+    };
+    const customerRegistor = ()  => {
+
     }
-  },
-  methods: {
-    toCustomerInput: function () {
-      this.$router.push("/customerInput")
-    },
-    toCustomerRegistor: function () {
-      this.$router.push("/customerRegistor")
-    },
+    onMounted(() => {
+      console.log('-- App Mounted!! --') // mountedの確認用
+    });
+    return { 
+      store,
+      toCustomerInput,
+      toCustomerRegistor
+    };
   },
 }
 </script>
@@ -47,7 +38,6 @@ export default {
 <template>
   <h1>顧客情報確認画面</h1>
   <div>store:{{ store.count }}</div>
-  <div>data: {{ this.customer.name }}</div>
   <div>
     <table class="table table-bordered border custommer-table">
       <tbody>
@@ -73,9 +63,7 @@ export default {
         </tr>
         <tr>
           <td>性別</td>
-          <td>
           <td>{{ store.customer.gender }}</td>
-          </td>
         </tr>
       </tbody>
     </table>

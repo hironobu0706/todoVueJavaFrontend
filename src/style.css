@@ -315,7 +315,15 @@ body{
 }
 
 .back-button {
+  color: #FFF;
   background-color: gray!important;
   width:200px;
   height:80px;
+}
+.back-button:hover{
+  color: #FFF;
+}
+.breadcrumbsWrapper{
+  width:800px;
+  margin:auto;
 }

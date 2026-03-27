@@ -6,15 +6,18 @@
 // import axios from 'axios'
 import { useStore } from '../../store';
 import { useRouter } from "vue-router";
-import { ref, reactive,onMounted } from 'vue'
+import { ref, reactive, onMounted } from 'vue'
+import breadcrumbs from '../parts/breadcrumbs.vue'
+
 
 export default {
-  name: 'init',
+  name: 'customerInput',
   setup() {
     const sample = ref(1);
     let customer = reactive({
       name: "",
       nameKana: "",
+      // mailAddress: "",
       jushoPref: "",
       jusho1: "",
       jusho2: "",
@@ -26,12 +29,12 @@ export default {
       router.push("/customerConfirm")
     };
     const toInit = () => {
-      sample.value = 39;
-      // router.push("/init")
+      // sample.value = 39;
+      router.push("/init")
     };
     onMounted(() => {
       console.log('-- App Mounted!! --') // mountedの確認用
-      Object.assign(customer, store.customer)
+      Object.assign(customer, store.customer) // reactiveはこうやって入れるらしい
     });
     return {
       sample,
@@ -41,21 +44,21 @@ export default {
       toInit
     };
   },
-  created() {
-    console.log('** App Created!! **') // createの確認用
-  },
-  data() {
-    return {
-    }
-  },
+  components: {
+    breadcrumbs
+  }
 }
 </script>
 
 <template>
   <h1>顧客情報入力画面</h1>
   <div>store:{{ store.count }}</div>
-  <div>data: {{ this.customer.name }}</div>
+  <div>data: {{ customer.name }}</div>
   <div>data2: {{ sample }}</div>
+  <div>変更完了</div>
+  <div class="breadcrumbsWrapper">
+    <breadcrumbs />
+  </div>
   <div>
     <table class="table table-bordered border custommer-table">
       <tbody>
@@ -66,25 +69,6 @@ export default {
         <tr>
           <td>カナ</td>
           <td><input class="form-control" type="text" placeholder="シメイ" v-model="customer.nameKana"></td>
-        </tr>
-        <tr>
-          <td>住所(都道府県)</td>
-          <td>
-            <select class="form-select" v-model="customer.jushoPref">
-              <option selected value="1">東京</option>
-              <option value="2">埼玉</option>
-              <option value="3">千葉</option>
-              <option value="4">神奈川</option>
-            </select>
-          </td>
-        </tr>
-        <tr>
-          <td>住所1</td>
-          <td><input class="form-control" type="text" placeholder="練馬区北町９９ー１－１" v-model="customer.jusho1"></input></td>
-        </tr>
-        <tr>
-          <td>住所2</td>
-          <td><input class="form-control" type="text" placeholder="メゾンキタマチ　１０１" v-model="customer.jusho2"></input></td>
         </tr>
         <tr>
           <td>性別</td>
@@ -111,6 +95,25 @@ export default {
               </label>
             </div>
           </td>
+        </tr>
+        <tr>
+          <td>住所(都道府県)</td>
+          <td>
+            <select class="form-select" v-model="customer.jushoPref">
+              <option selected value="1">東京</option>
+              <option value="2">埼玉</option>
+              <option value="3">千葉</option>
+              <option value="4">神奈川</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>住所1</td>
+          <td><input class="form-control" type="text" placeholder="練馬区北町９９ー１－１" v-model="customer.jusho1"></input></td>
+        </tr>
+        <tr>
+          <td>住所2</td>
+          <td><input class="form-control" type="text" placeholder="メゾンキタマチ　１０１" v-model="customer.jusho2"></input></td>
         </tr>
       </tbody>
     </table>
