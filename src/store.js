@@ -5,12 +5,14 @@ export const useStore = defineStore('main', {
     state: () => ({
         count: 13,
         customer: {
-            name: "指名",
-            nameKana: "サトウタロウ",
-            jushoPref: "3",
-            jusho1: "さいたまし",
-            jusho2: "みなみくりはし",
-            gender: "2",
+            mailAddress: "",
+            password: "",
+            name: "",
+            nameKana: "",
+            jushoPref: "",
+            jusho1: "",
+            jusho2: "",
+            gender: "",
         }
     }),
     actions: {
@@ -28,6 +30,9 @@ export const useStore = defineStore('main', {
               .catch(err => {
                 console.log("err:", err);
               });
+        },
+        customerInput(inputCustomer) {
+            this.customer = inputCustomer
         }
     },
     getters: {

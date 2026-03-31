@@ -1,58 +1,45 @@
 <script>
-// import { ref } from 'vue'
-// import viteLogo from '../assets/vite.svg'
-// import heroImg from '../assets/hero.png'
-// import vueLogo from '../assets/vue.svg'
-// import axios from 'axios'
 import { useStore } from '../../store';
+import { useRouter } from "vue-router";
+import breadcrumbs from '../parts/breadcrumbs.vue'
 
 export default {
   name: 'init',
   setup() {
+    // 各画面共通で必要なもの
     const store = useStore();
-    return { store };
-  },
-  created() {
-    console.log('** App Created!! **') // createの確認用
-  },
-  mounted() {
-    console.log('-- App Mounted!! --') // mountedの確認用
-  },
-  data() {
+    const router = useRouter();
+
+    // 各画面固有の関数等
+    store.$reset();
+    const toInit = () => {
+      router.push("/init")
+    };
     return {
-      title: 'Router',
-      customer: {
-        name: "",
-        nameKana: "",
-        jushoPref: "",
-        jusho1: "",
-        jusho2: "",
-        gender: "",
-      }
+      toInit,
     }
   },
-  methods: {
-    toInit: function () {
-      this.$router.push("/init")
-    },
-  },
+  components: {
+    breadcrumbs
+  }
 }
 </script>
 
 <template>
-  <h1>顧客情報登録完了画面</h1>
-  <div>
-    お客様情報のご登録が完了しました。
-  </div>
-  <div class="button-container">
-    <button type="button" class="btn btn-primary next-button" @click="toInit">
-      トップページ画面へ
-    </button>
+  <div class="content-area">
+    <h1>顧客情報登録完了画面</h1>
+    <div class="breadcrumbsWrapper">
+      <breadcrumbs nowPage="4" />
+    </div>
+    <div>
+      お客様情報のご登録が完了しました。<br />
+      ログインを行い、マイページをご確認ください。
+    </div>
+    <div class="button-container">
+      <button type="button" class="btn btn-primary next-button" @click="toInit">
+        トップページ画面へ
+      </button>
+    </div>
   </div>
 </template>
-<style>
-.custommer-table {
-  width: 60%;
-  margin: auto;
-}
-</style>
+<style></style>
