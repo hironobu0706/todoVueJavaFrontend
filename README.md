@@ -1,6 +1,12 @@
->このリポジトリは申し込みシステム（ポートフォリオ）のフロントサイドです。<br/>
->バックエンドは以下を参照ください。<br/>
->https://github.com/hironobu0706/todoVueJavaBackend
+>このリポジトリは申し込みシステム（ポートフォリオ）のフロントサイドです。  
+>環境構築（起動するにはこれが必要）：https://github.com/hironobu0706/todoVueJavaInfra  
+>バックエンドソース：https://github.com/hironobu0706/todoVueJavaBackend  
+>
+> + 使用言語等
+> +    "axios": "^1.13.6",
+> +    "pinia": "^3.0.4",
+> +    "vue": "^3.5.30",
+> +    "vue-router": "^5.0.4"
 
 <h2>以下、起動方法及び画面説明</h2>
 
