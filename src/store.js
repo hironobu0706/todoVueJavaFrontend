@@ -21,7 +21,7 @@ export const useStore = defineStore('main', {
         },
         async customerRegistor() {
             //POSTリクエスト（通信）
-            const url = axios.post("http://localhost:8080/api/createCustomer", this.customer)
+            const url = axios.post(import.meta.env.VITE_API_URL + "/api/createCustomer", this.customer)
 
               .then(() => {
                 console.log(url)

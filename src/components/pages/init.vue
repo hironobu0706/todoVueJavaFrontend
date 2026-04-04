@@ -11,6 +11,7 @@ export default {
 
     // 各画面固有の関数等
     onMounted(() => {
+      console.log("環境変数：", import.meta.env.VITE_API_URL)
     });
     const toCustomerInput = () => {
       router.push("/customerInput")

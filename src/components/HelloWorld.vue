@@ -8,7 +8,7 @@ import axios from 'axios'
 const count = ref(0)
 function sample() {
   // GETリクエスト（通信）
-  const url = axios.get("http://localhost:8080/api/sample")
+  const url = axios.get(import.meta.env.VITE_API_URL + "/api/sample")
     // thenで成功した場合の処理
     .then(() => {
       console.log("ステータスコード:", status);
@@ -20,7 +20,7 @@ function sample() {
 
   //POSTリクエスト（通信）
   // const data = { firstName: "Taro", lastName: "Yamada" }
-  // const url = axios.post("http://localhost:3000/user/123", data)
+  // const url = axios.post(import.meta.env.VITE_API_URL + "/user/123", data)
 
   //   .then(() => {
   //     console.log(url)
