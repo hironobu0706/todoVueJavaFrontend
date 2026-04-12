@@ -1,8 +1,8 @@
 <script>
 import { useRouter } from "vue-router";
 import { onMounted } from 'vue'
-import { useStore } from '../../store';
-import breadcrumbs from '../parts/breadcrumbs.vue'
+import { useStore } from '../../../store';
+import breadcrumbs from '../../parts/breadcrumbs.vue'
 
 export default {
   name: 'customerConfirm',

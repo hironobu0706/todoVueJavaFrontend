@@ -1,7 +1,7 @@
 <script>
-import { useStore } from '../../store';
+import { useStore } from '../../../store';
 import { useRouter } from "vue-router";
-import breadcrumbs from '../parts/breadcrumbs.vue'
+import breadcrumbs from '../../parts/breadcrumbs.vue'
 
 export default {
   name: 'init',

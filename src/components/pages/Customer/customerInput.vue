@@ -1,8 +1,8 @@
 <script>
-import { useStore } from '../../store';
+import { useStore } from '../../../store';
 import { useRouter } from "vue-router";
 import { ref, reactive, onMounted } from 'vue'
-import breadcrumbs from '../parts/breadcrumbs.vue'
+import breadcrumbs from '../../parts/breadcrumbs.vue'
 
 
 export default {

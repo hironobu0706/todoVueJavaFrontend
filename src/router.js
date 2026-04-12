@@ -4,10 +4,11 @@
 import { createRouter, createWebHistory} from 'vue-router'
 import sample1 from './components/pages/sample1.vue'
 import sample2 from './components/pages/sample2.vue'
-import init from './components/pages/init.vue'
-import customerInput from './components/pages/customerInput.vue'
-import customerConfirm from './components/pages/customerConfirm.vue'
-import customerRegistor from './components/pages/customerRegistor.vue'
+import init from './components/pages/Customer/init.vue'
+import login from './components/pages/login.vue'
+import customerInput from './components/pages/Customer/customerInput.vue'
+import customerConfirm from './components/pages/Customer/customerConfirm.vue'
+import customerRegistor from './components/pages/Customer/customerRegistor.vue'
 import HelloWorld from './components/HelloWorld.vue'
 
 // メモ
@@ -37,6 +38,11 @@ export const router = createRouter({
       path: '/init',
       name: 'init',
       component: init,
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: login,
     },
     {
       path: '/customerInput',
