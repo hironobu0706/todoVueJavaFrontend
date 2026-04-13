@@ -1,13 +1,11 @@
-<script>
+<script setup>
 import { useStore } from '../../../store';
 import { useRouter } from "vue-router";
 import { ref, reactive, onMounted } from 'vue'
 import breadcrumbs from '../../parts/breadcrumbs.vue'
+import * as Yup from 'yup'
+import CustomerForm from './CustomerForm.vue'
 
-
-export default {
-  name: 'customerInput',
-  setup() {
     // 各画面共通で必要なもの
     const store = useStore();
     const router = useRouter();
@@ -35,18 +33,24 @@ export default {
     onMounted(() => {
       Object.assign(customer, store.customer) // reactiveはこうやって入れるらしい
     });
-    return {
-      sample,
-      customer,
-      store,
-      toCustomerConfirm,
-      toInit
-    };
-  },
-  components: {
-    breadcrumbs
-  }
-}
+// export default {
+//   name: 'customerInput',
+//   setup() {
+//     return {
+//       sample,
+//       customer,
+//       store,
+//       toCustomerConfirm,
+//       toInit,
+//       formSchema,
+//     };
+//   },
+//   components: {
+//     breadcrumbs,
+//     CustomerForm
+//     // customerInputForm
+//   }
+// }
 </script>
 
 <template>
@@ -59,7 +63,9 @@ export default {
       <breadcrumbs nowPage="2" />
     </div>
     <div>
-      <table class="table table-bordered border">
+      <CustomerForm v-model="customer" />
+
+      <!-- <table class="table table-bordered border">
         <tbody>
           <tr>
             <td>メールアドレス</td>
@@ -125,7 +131,7 @@ export default {
             </td>
           </tr>
         </tbody>
-      </table>
+      </table> -->
     </div>
     <div class="button-container">
       <button type="button" class="btn back-button" @click="toInit">
