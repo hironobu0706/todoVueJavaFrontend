@@ -2,8 +2,6 @@
 // まずはimport文でVueRouterから必要な関数などを用意する。
 // ルーティングで割り当てるコンポーネント類も用意しておく。
 import { createRouter, createWebHistory} from 'vue-router'
-import sample1 from './components/pages/sample1.vue'
-import sample2 from './components/pages/sample2.vue'
 import init from './components/pages/Customer/init.vue'
 import login from './components/pages/login.vue'
 import customerInput from './components/pages/Customer/customerInput.vue'
@@ -23,16 +21,6 @@ export const router = createRouter({
       path: '/hello',             // 割り当てるパス
       name: '/hello',         // 名前
       component: HelloWorld, // 割り当てるコンポーネント
-    },
-    {
-      path: '/sample1',             // 割り当てるパス
-      name: 'sample1',         // 名前
-      component: sample1, // 割り当てるコンポーネント
-    },
-    {
-      path: '/sample2',
-      name: 'sample2',
-      component: sample2,
     },
     {
       path: '/init',

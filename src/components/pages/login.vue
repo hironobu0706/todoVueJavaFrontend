@@ -1,41 +1,50 @@
-<script>
+<script setup>
 import { onMounted } from 'vue'
 import { useRouter } from "vue-router";
+import { useForm } from 'vee-validate';
+import * as yup from 'yup';
 
-export default {
-  name: 'login',
-  setup() {
-    // 各画面共通で必要なもの
-    const router = useRouter();
+// 各画面共通で必要なもの
+const router = useRouter();
 
-    // 各画面固有の関数等
-    onMounted(() => {
-      console.log("環境変数：", import.meta.env.VITE_API_URL)
-    });
-    const toCustomerInput = () => {
-      router.push("/customerInput")
-    };
-    const toLogin = () => {
-      router.push("/login")
-    };
-    return {
-      toCustomerInput,
-    };
-  },
+// 各画面固有の関数等
+onMounted(() => {
+});
+const toCustomerInput = () => {
+  router.push("/customerInput")
+};
+const toLogin = () => {
+  router.push("/login")
+};
+function onSubmit() {
+  console.log("submit")
 }
+
+// 検証スキーマ
+const schema = yup.object({
+  mailAddress: yup.string().email().required(),
+});
+const { values, errors, defineField } = useForm({
+  validationSchema: schema,
+});
+
+const [mailAddress, mailAddressAttrs] = defineField('mailAddress',{
+  validateOnModelUpdate: false,
+})
+
 </script>
 
 <template>
   <div class="content-area">
-    <h1>トップページ画面</h1>
+    <h1>ログイン画面</h1>
     <div>ここに説明等を記載</div>
     <div class="button-container">
-      <button type="button" class="btn btn-primary next-button" @click="toCustomerInput">
-        個人情報登録ページへ
-      </button>
-      <button type="button" class="btn btn-primary next-button" @click="toLogin">
-        ログインページへ
-      </button>
+      <br />
+
+      <input v-model="mailAddress" v-bind="mailAddressAttrs" />
+
+      <pre>values:{{ values.mailAddress }}</pre>
+      <pre>errors: {{ errors.mailAddress }}</pre>
     </div>
   </div>
 </template>
