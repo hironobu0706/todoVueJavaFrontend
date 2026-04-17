@@ -47,7 +47,7 @@ const [password, passwordAttrs] = defineField('password', {
         <label>メールアドレス</label>
       </v-col>
       <v-col cols="9">
-        <input type="email" class="form-control" v-model="mailAddress"  v-bind="mailAddressAttrs"/>
+        <input type="email" class="form-control" v-model="mailAddress" v-bind="mailAddressAttrs" />
         <!-- <input v-model="mailAddress" v-bind="mailAddressAttrs" />
       <pre>values:{{ values.mailAddress }}</pre> -->
       </v-col>
@@ -64,7 +64,7 @@ const [password, passwordAttrs] = defineField('password', {
         <label>パスワード</label>
       </v-col>
       <v-col cols="9">
-        <input type="password" class="form-control" v-model="password"  v-bind="passwordAttrs" />
+        <input type="password" class="form-control" v-model="password" v-bind="passwordAttrs" />
         <!-- <input v-model="password" v-bind="passwordAttrs" />
       <pre>values:{{ values.password }}</pre>-->
         <!-- <div>{{ errors.password }}</div> -->
@@ -78,7 +78,12 @@ const [password, passwordAttrs] = defineField('password', {
       </v-col>
     </v-row>
     <div class="button-container">
-      <br />
+      <v-btn append-icon="$next" height="70" spaced="end" width="220" color="primary">
+        <span class="text-left">
+          <div class="">Next</div>
+        </span>
+      </v-btn>
+      <v-icon>mdi-home</v-icon> #ホーム
     </div>
   </div>
 </template>
