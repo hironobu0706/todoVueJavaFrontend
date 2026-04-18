@@ -8,6 +8,7 @@ import customerInput from './components/pages/Customer/customerInput.vue'
 import customerConfirm from './components/pages/Customer/customerConfirm.vue'
 import customerRegistor from './components/pages/Customer/customerRegistor.vue'
 import HelloWorld from './components/HelloWorld.vue'
+import Mypage from './components/pages/Customer/Mypage.vue'
 
 // メモ
 // export 値 で、そのスクリプトファイルをimportした時に指定の値が取り出せるようになる。
@@ -46,6 +47,11 @@ export const router = createRouter({
       path: '/customerRegistor',
       name: 'customerRegistor',
       component: customerRegistor,
+    },
+    {
+      path: '/mypage',
+      name: 'mypage',
+      component: Mypage,
     },
     // {
     //   path: '*',

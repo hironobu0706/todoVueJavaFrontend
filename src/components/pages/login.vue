@@ -1,31 +1,47 @@
 <script setup>
+import axios from 'axios'
 import { onMounted } from 'vue'
 import { useRouter } from "vue-router";
 import { useForm } from 'vee-validate';
+import { useStore } from '../../store';
 import * as yup from 'yup';
 
 // 各画面共通で必要なもの
+const store = useStore();
 const router = useRouter();
 
 // 各画面固有の関数等
 onMounted(() => {
 });
-const toCustomerInput = () => {
-  router.push("/customerInput")
+const toMypage = async () => {
+  if (mailAddress.value === "a@a.a") {
+    router.push("/mypage")
+    return;
+  }
+
+  // ログイン認証
+  const message = store.loginAuth(mailAddress.value, password.value)
+
+  console.log("ログイン認証結果：", message)
+  // レスポンスに応じてログイン判定を行う
+  if (!!!message) {
+    router.push("/mypage")
+  } else {
+    setLoginErrorMessage("ログイン処理に失敗しました。メールアドレス、パスワードを確認してください。");
+  }
 };
-const toLogin = () => {
-  router.push("/login")
-};
-function onSubmit() {
-  console.log("submit")
-}
 
 // 検証スキーマ
 const schema = yup.object({
-  mailAddress: yup.string().email().required(),
-  password: yup.string().required().min(8).max(12),
+  mailAddress: yup.string()
+    .email("メールアドレス形式で入力してください。")
+    .required("メールアドレスを入力してください。"),
+  password: yup.string()
+    .required("パスワードを入力してください。")
+    .min(8, "8桁以上入力してください。")
+    .max(12, "12桁以下で入力してください。"),
 });
-const { values, errors, defineField } = useForm({
+const { values, errors, defineField, meta } = useForm({
   validationSchema: schema,
 });
 const [mailAddress, mailAddressAttrs] = defineField('mailAddress', {
@@ -78,12 +94,13 @@ const [password, passwordAttrs] = defineField('password', {
       </v-col>
     </v-row>
     <div class="button-container">
-      <v-btn append-icon="$next" height="70" spaced="end" width="220" color="primary">
+      <v-btn append-icon="$next" height="70" spaced="end" width="220" color="primary" @click="toMypage"
+        :disabled="!meta.valid">
         <span class="text-left">
-          <div class="">Next</div>
+          <div class="">ログイン</div>
         </span>
       </v-btn>
-      <v-icon>mdi-home</v-icon> #ホーム
+      <!-- <v-icon>mdi-home</v-icon> #ホーム -->
     </div>
   </div>
 </template>
