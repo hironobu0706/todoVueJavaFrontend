@@ -1,6 +1,6 @@
 <script setup>
 import axios from 'axios'
-import { onMounted } from 'vue'
+import { ref, onMounted } from 'vue'
 import { useRouter } from "vue-router";
 import { useForm } from 'vee-validate';
 import { useStore } from '../../store';
@@ -9,26 +9,30 @@ import * as yup from 'yup';
 // 各画面共通で必要なもの
 const store = useStore();
 const router = useRouter();
+const errMsg = ref("");
 
 // 各画面固有の関数等
 onMounted(() => {
 });
 const toMypage = async () => {
+  errMsg.value = "";
   if (mailAddress.value === "a@a.a") {
     router.push("/mypage")
     return;
   }
 
   // ログイン認証
-  const message = store.loginAuth(mailAddress.value, password.value)
-
-  console.log("ログイン認証結果：", message)
-  // レスポンスに応じてログイン判定を行う
-  if (!!!message) {
-    router.push("/mypage")
-  } else {
-    setLoginErrorMessage("ログイン処理に失敗しました。メールアドレス、パスワードを確認してください。");
-  }
+  const response = store.loginAuth(mailAddress.value, password.value)
+  .then(res => {
+    console.log("store.customer.id:", store.customer.id)
+    if (store.customer.id) {
+      router.push("/mypage")
+    } else {
+      errMsg.value = "ログイン処理に失敗しました。メールアドレス、パスワードを確認してください。";
+    }
+  }).catch((error) => {
+    console.log(error)
+  })
 };
 
 // 検証スキーマ
@@ -50,6 +54,8 @@ const [mailAddress, mailAddressAttrs] = defineField('mailAddress', {
 const [password, passwordAttrs] = defineField('password', {
   validateOnModelUpdate: false,
 })
+mailAddress.value = "b@b.b"
+password.value = "password"
 
 </script>
 
@@ -72,7 +78,7 @@ const [password, passwordAttrs] = defineField('password', {
       <v-col cols="3">
       </v-col>
       <v-col cols="9">
-        <p>{{ errors.mailAddress }}</p>
+        <p class="err-msg">{{ errors.mailAddress }}</p>
       </v-col>
     </v-row>
     <v-row justify="center" align="center">
@@ -90,9 +96,11 @@ const [password, passwordAttrs] = defineField('password', {
       <v-col cols="3">
       </v-col>
       <v-col cols="9">
-        <p>{{ errors.password }}</p>
+        <p class="err-msg">{{ errors.password }}</p>
       </v-col>
     </v-row>
+
+    <p class="err-msg">{{ errMsg }}</p>
     <div class="button-container">
       <v-btn append-icon="$next" height="70" spaced="end" width="220" color="primary" @click="toMypage"
         :disabled="!meta.valid">

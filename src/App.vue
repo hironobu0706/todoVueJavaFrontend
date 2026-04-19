@@ -13,7 +13,7 @@ export default {
       router.push("/init")
     };
     onMounted(() => {
-      router.push("/init")
+      router.push("/login")
     });
     return {
       toInit,

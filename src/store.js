@@ -5,6 +5,7 @@ export const useStore = defineStore('main', {
     state: () => ({
         count: 13,
         customer: {
+            id: "",
             mailAddress: "",
             password: "",
             name: "",
@@ -32,22 +33,17 @@ export const useStore = defineStore('main', {
                 });
         },
         loginAuth(mailAddress, password) {
-            let response;
-            let message
-            try {
-                response = axios.post(import.meta.env.VITE_API_URL + "/api/loginAuth", {
+            return new Promise((resolve, reject) => {
+                const data = axios.post(import.meta.env.VITE_API_URL + "/api/loginAuth", {
                     mailAddress,
                     password,
+                }).then((res) => {
+                    this.customer = res.data
+                    return resolve()
+                }).catch((error) => {
+                    return reject(error)
                 })
-            } catch (error) {
-                if (error instanceof Error) {
-                    message = error.message
-                } else {
-                    message = String(error)
-                }
-                reportError({ message })
-            }
-            return message;
+            })
         },
         customerInput(inputCustomer) {
             this.customer = inputCustomer
